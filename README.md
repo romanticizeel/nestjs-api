@@ -1,5 +1,3 @@
-Here is the updated README file with the tech stack versions:
-
 # **Modular API Project**
 
 This project is a collection of modular function APIs built using the NestJS framework. The API is designed to simplify development and management of applications using a modular approach.

@@ -19,10 +19,11 @@ model User {
   updatedAt DateTime @updatedAt
 
   email String @unique
-  hash String
+  hash String?
 
   firstName String?
   lastName  String?
+  picture String?
 
   bookmarks Bookmark[]
 

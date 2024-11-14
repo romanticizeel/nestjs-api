@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsEmail,
   IsOptional,
@@ -5,14 +6,26 @@ import {
 } from 'class-validator';
 
 export class EditUserDto {
+  @ApiProperty({
+    example: 'example@gmail.com',
+    required: false,
+  })
   @IsEmail()
   @IsOptional()
   email?: string;
 
+  @ApiProperty({
+    example: 'John',
+    required: false,
+  })
   @IsString()
   @IsOptional()
   firstName?: string;
 
+  @ApiProperty({
+    example: 'Doe',
+    required: false,
+  })
   @IsString()
   @IsOptional()
   lastName?: string;

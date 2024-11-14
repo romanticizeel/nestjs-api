@@ -1,6 +1,8 @@
 import {
   ForbiddenException,
   Injectable,
+  InternalServerErrorException,
+  HttpStatus,
 } from '@nestjs/common';
 import { PrismaService } from '@/prisma/prisma.service';
 import { AuthDto } from './dto';
@@ -30,7 +32,14 @@ export class AuthService {
       });
 
       // return the saved user
-      return this.signToken(user.id, user.email);
+      return {
+        statusCode: HttpStatus.CREATED,
+        message: 'User signed up successfully',
+        data: await this.signToken(
+          user.id,
+          user.email,
+        ),
+      };
     } catch (error) {
       if (
         error instanceof
@@ -76,10 +85,74 @@ export class AuthService {
         );
 
       // send back the user
-      return this.signToken(user.id, user.email);
+      return {
+        statusCode: HttpStatus.OK,
+        message: 'User signed in successfully',
+        data: await this.signToken(
+          user.id,
+          user.email,
+        ),
+      };
     } catch (error) {
-      throw error;
+      if (error instanceof ForbiddenException) {
+        throw error;
+      }
+
+      throw new InternalServerErrorException(
+        'Something went wrong, please try again later.',
+      );
     }
+  }
+
+  async googleLogin(req) {
+    if (!req.user) {
+      return { message: 'No user from Google' };
+    }
+
+    // Extract user data from Google profile
+    const {
+      email,
+      firstName,
+      lastName,
+      picture,
+    } = req.user;
+
+    // Check if user exists in the database
+    let user = await this.prisma.user.findUnique({
+      where: { email },
+    });
+
+    // If the user does not exist, create a new record
+    if (!user) {
+      user = await this.prisma.user.create({
+        data: {
+          email,
+          firstName,
+          lastName,
+          picture,
+        },
+      });
+    } else {
+      // Optionally update user if picture is not saved yet
+      user = await this.prisma.user.update({
+        where: { email },
+        data: {
+          picture: picture || user.picture,
+        },
+      });
+    }
+
+    // Issue JWT token with signToken function
+    const { access_token } = await this.signToken(
+      user.id,
+      user.email,
+    );
+
+    return {
+      message:
+        'Google authentication successful. User has been signed in.',
+      accessToken: access_token,
+    };
   }
 
   async signToken(
@@ -95,7 +168,7 @@ export class AuthService {
     const token = await this.jwt.signAsync(
       payload,
       {
-        expiresIn: '15m',
+        expiresIn: '1d',
         secret: secret,
       },
     );

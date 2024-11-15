@@ -6,30 +6,30 @@ import {
   ApiBody,
 } from '@nestjs/swagger';
 import {
-  CreateBookmakrResponseExample,
-  EditBookmarkResponseExample,
-  GetBookmarkByIdResponseExample,
-  GetBookmarksResponseExample,
+  CreateArticleResponseExample,
+  EditArticleResponseExample,
+  GetArticleByIdResponseExample,
+  GetArticlesResponseExample,
 } from './response.examples';
 import {
-  CreateBookmarkDto,
-  EditBookmarkDto,
+  CreateArticleDto,
+  EditArticleDto,
 } from '../dto';
 
-export function SwaggerGetBookmarks() {
+export function SwaggerGetArticles() {
   return applyDecorators(
     ApiBearerAuth(),
     ApiOperation({
-      summary: 'Retrieve user bookmarks',
+      summary: 'Retrieve user articles',
       description:
-        'This endpoint retrieves a list of bookmarks saved by the currently authenticated user.',
+        'This endpoint retrieves a list of articles saved by the currently authenticated user.',
     }),
     ApiResponse({
       status: 200,
       description:
-        'Successfully retrieved current user bookmarks.',
+        'Successfully retrieved current user articles.',
       schema: {
-        example: GetBookmarksResponseExample,
+        example: GetArticlesResponseExample,
       },
     }),
     ApiResponse({
@@ -45,20 +45,20 @@ export function SwaggerGetBookmarks() {
   );
 }
 
-export function SwaggerGetBookmarkById() {
+export function SwaggerGetArticleById() {
   return applyDecorators(
     ApiBearerAuth(),
     ApiOperation({
-      summary: 'Retrieve user bookmark by id',
+      summary: 'Retrieve user article by id',
       description:
-        'This endpoint retrieves a detail bookmark information that saved by the currently authenticated user.',
+        'This endpoint retrieves a detail article information that saved by the currently authenticated user.',
     }),
     ApiResponse({
       status: 200,
       description:
-        'Successfully retrieved current user bookmark.',
+        'Successfully retrieved current user article.',
       schema: {
-        example: GetBookmarkByIdResponseExample,
+        example: GetArticleByIdResponseExample,
       },
     }),
     ApiResponse({
@@ -74,20 +74,20 @@ export function SwaggerGetBookmarkById() {
   );
 }
 
-export function SwaggerCreateBookmark() {
+export function SwaggerCreateArticle() {
   return applyDecorators(
     ApiBearerAuth(),
     ApiOperation({
-      summary: 'Create a new bookmark',
+      summary: 'Create a new article',
       description:
-        'This endpoint allows the currently authenticated user to create a new bookmark and save it.',
+        'This endpoint allows the currently authenticated user to create a new article and save it.',
     }),
     ApiResponse({
       status: 201,
       description:
         'The record has been successfully updated.',
       schema: {
-        example: CreateBookmakrResponseExample,
+        example: CreateArticleResponseExample,
       },
     }),
     ApiResponse({
@@ -96,27 +96,27 @@ export function SwaggerCreateBookmark() {
         'Something went wrong, please try again later.',
     }),
     ApiBody({
-      type: CreateBookmarkDto,
+      type: CreateArticleDto,
       description:
-        'Json structure for create bookmark object',
+        'Json structure for create article object',
     }),
   );
 }
 
-export function SwaggerEditBookmark() {
+export function SwaggerEditArticle() {
   return applyDecorators(
     ApiBearerAuth(),
     ApiOperation({
-      summary: 'Edit Bookmark',
+      summary: 'Edit article',
       description:
-        'This endpoint allows the authenticated user to update an existing bookmark with new details such as title, URL, and description.',
+        'This endpoint allows the authenticated user to update an existing article with new details such as title, URL, and description.',
     }),
     ApiResponse({
       status: 200,
       description:
-        'The bookmark has been successfully updated.',
+        'The article has been successfully updated.',
       schema: {
-        example: EditBookmarkResponseExample,
+        example: EditArticleResponseExample,
       },
     }),
     ApiResponse({
@@ -129,29 +129,29 @@ export function SwaggerEditBookmark() {
         'Something went wrong, please try again later.',
     }),
     ApiBody({
-      type: EditBookmarkDto,
+      type: EditArticleDto,
       description:
-        'JSON structure for updating a bookmark object',
+        'JSON structure for updating a article object',
     }),
   );
 }
 
-export function SwaggerDeleteBookmark() {
+export function SwaggerDeleteArticle() {
   return applyDecorators(
     ApiBearerAuth(),
     ApiOperation({
-      summary: 'Delete Bookmark',
+      summary: 'Delete article',
       description:
-        'This endpoint allows the authenticated user to delete an existing bookmark by its ID.',
+        'This endpoint allows the authenticated user to delete an existing article by its ID.',
     }),
     ApiResponse({
       status: 200,
       description:
-        'The bookmark has been successfully deleted.',
+        'The article has been successfully deleted.',
     }),
     ApiResponse({
       status: 404,
-      description: 'Bookmark not found.',
+      description: 'Article not found.',
     }),
     ApiResponse({
       status: 500,

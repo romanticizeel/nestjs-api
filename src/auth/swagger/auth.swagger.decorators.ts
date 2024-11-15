@@ -85,3 +85,23 @@ export function SwaggerSignin() {
     }),
   );
 }
+
+export function SwaggerGetGoogleAuth() {
+  return applyDecorators(
+    ApiOperation({
+      summary: 'User Sign-in with Google',
+      description:
+        'This endpoint allows the user to sign in using Google OAuth. The user will be redirected to Google for authentication and, upon success, will receive a JSON Web Token (JWT) for accessing protected routes.',
+    }),
+  );
+}
+
+export function SwaggerGetGoogleAuthRedirect() {
+  return applyDecorators(
+    ApiOperation({
+      summary: 'Google OAuth Redirect',
+      description:
+        'After the user authenticates with Google, they are redirected back to this endpoint. This endpoint handles the Google authentication response, verifies the user, and issues a JWT for future authenticated requests.',
+    }),
+  );
+}

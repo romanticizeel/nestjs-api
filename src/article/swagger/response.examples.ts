@@ -1,7 +1,7 @@
-export const GetBookmarksResponseExample = {
+export const GetArticlesResponseExample = {
   statusCode: 200,
   message:
-    'User Bookmarks data retrieved successfully.',
+    'User Articles data retrieved successfully.',
   data: [
     {
       id: 1,
@@ -24,10 +24,10 @@ export const GetBookmarksResponseExample = {
   ],
 };
 
-export const GetBookmarkByIdResponseExample = {
+export const GetArticleByIdResponseExample = {
   statusCode: 200,
   message:
-    'User Bookmarks data retrieved successfully.',
+    'User Article data retrieved successfully.',
   data: {
     id: 1,
     createdAt: '2024-11-12T06:42:48.961Z',
@@ -40,9 +40,9 @@ export const GetBookmarkByIdResponseExample = {
   },
 };
 
-export const CreateBookmakrResponseExample = {
+export const CreateArticleResponseExample = {
   statusCode: 201,
-  message: 'Bookmark created successfully.',
+  message: 'Article created successfully.',
   data: {
     id: 1,
     createdAt: '2024-11-12T06:42:48.961Z',
@@ -54,9 +54,9 @@ export const CreateBookmakrResponseExample = {
   },
 };
 
-export const EditBookmarkResponseExample = {
+export const EditArticleResponseExample = {
   statusCode: 200,
-  message: 'Bookmark updated successfully.',
+  message: 'Article updated successfully.',
   data: {
     id: 1,
     createdAt: '2024-11-12T06:42:48.961Z',

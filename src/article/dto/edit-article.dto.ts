@@ -4,7 +4,7 @@ import {
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class EditBookmarkDto {
+export class EditArticleDto {
   @ApiProperty({
     example:
       'Updated unlocking the Future of Technology',

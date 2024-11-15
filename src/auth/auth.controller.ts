@@ -11,6 +11,8 @@ import {
 import { AuthService } from './auth.service';
 import { AuthDto } from './dto'; // import all the files in the dto folder, and we can use the AuthDto type, if there else we can add it to the brackets
 import {
+  SwaggerGetGoogleAuth,
+  SwaggerGetGoogleAuthRedirect,
   SwaggerSignin,
   SwaggerSignup,
 } from './swagger';
@@ -34,10 +36,12 @@ export class AuthController {
   } /* end of signin */
 
   @Get()
+  @SwaggerGetGoogleAuth()
   @UseGuards(GoogleOAuthGuard)
   async googleAuth() {}
 
   @Get('google-redirect')
+  @SwaggerGetGoogleAuthRedirect()
   @UseGuards(GoogleOAuthGuard)
   async googleAuthRedirect(@Request() req) {
     return this.authService.googleLogin(req);

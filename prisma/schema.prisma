@@ -25,12 +25,12 @@ model User {
   lastName  String?
   picture String?
 
-  bookmarks Bookmark[]
+  articles Article[]
 
   @@map("users")
 }
 
-model Bookmark {
+model Article {
   id Int @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -42,5 +42,5 @@ model Bookmark {
   userId Int
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@map("bookmarks")
+  @@map("articles")
 }
